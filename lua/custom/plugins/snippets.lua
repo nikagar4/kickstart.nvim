@@ -11,9 +11,9 @@ return {
       end
       return 'make install_jsregexp'
     end)(),
-    config = function()
+    config = function(opts)
       require('luasnip').setup(opts)
-      require('luasnip.loaders.from_snipmate').lazy_load { paths = './snippets' }
+      require('luasnip.loaders.from_snipmate').lazy_load { paths = { './snippets' } }
     end,
     dependencies = {
       -- `friendly-snippets` contains a variety of premade snippets.
