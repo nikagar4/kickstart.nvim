@@ -1,13 +1,14 @@
 return {
   {
     'hrsh7th/nvim-cmp',
-    version = false,
+    --version = false,
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
     },
     config = function()
       local cmp = require 'cmp'
@@ -21,6 +22,11 @@ return {
           end,
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
+
+        -- For an understanding of why these mappings were
+        -- chosen, you will need to read `:help ins-completion`
+        --
+        -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
           ['<C-n>'] = cmp.mapping.select_next_item(),
