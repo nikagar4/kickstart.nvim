@@ -107,6 +107,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Disable line wrap
+vim.opt.wrap = false
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -146,6 +149,10 @@ vim.keymap.set('n', ']q', vim.cmd.cprevious, { desc = 'Jump to the previous item
 
 -- Keybind to open project netrw
 vim.keymap.set('n', '<leader>ex', vim.cmd.Ex, { desc = 'Open project netrw' })
+
+-- Keybind to move selection up and down
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
