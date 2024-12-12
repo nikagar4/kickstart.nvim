@@ -16,4 +16,18 @@ return {
       vim.cmd.hi 'Comment gui=none'
     end,
   },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+  },
+  {
+    'folke/styler.nvim',
+    config = function()
+      require('styler').setup {
+        themes = {
+          swift = { colorscheme = 'rose-pine-moon' },
+        },
+      }
+    end,
+  },
 }
