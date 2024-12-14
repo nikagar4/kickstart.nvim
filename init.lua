@@ -160,6 +160,12 @@ vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
 vim.keymap.set('n', '^', '0')
 vim.keymap.set('n', '0', '^')
 
+-- Add a save as sudo command for files not opened as sudo
+-- Link: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
+vim.api.nvim_create_user_command('SaveAsSudo', function()
+  vim.cmd 'w !sudo tee %'
+end, {})
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
