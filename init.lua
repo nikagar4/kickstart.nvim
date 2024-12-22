@@ -157,8 +157,8 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
 
 -- Keybinds for cursor movement
-vim.keymap.set('n', '^', '0')
-vim.keymap.set('n', '0', '^')
+-- vim.keymap.set('n', '^', '0')
+-- vim.keymap.set('n', '0', '^')
 
 -- Add a save as sudo command for files not opened as sudo
 -- Link: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work

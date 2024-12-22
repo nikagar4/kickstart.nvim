@@ -21,11 +21,15 @@ return {
     name = 'rose-pine',
   },
   {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+  },
+  {
     'folke/styler.nvim',
     config = function()
       require('styler').setup {
         themes = {
-          swift = { colorscheme = 'rose-pine-moon' },
+          swift = { colorscheme = 'catppuccin-macchiato' },
         },
       }
     end,
