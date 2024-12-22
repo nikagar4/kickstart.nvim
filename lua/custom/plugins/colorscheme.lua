@@ -10,7 +10,12 @@ return {
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+
+      if os.execute '[ -d ./*.xcodeproj ]' == 0 then
+        vim.cmd.colorscheme 'xcodehc'
+      else
+        vim.cmd.colorscheme 'tokyonight'
+      end
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
@@ -25,13 +30,16 @@ return {
     name = 'catppuccin',
   },
   {
-    'folke/styler.nvim',
-    config = function()
-      require('styler').setup {
-        themes = {
-          swift = { colorscheme = 'catppuccin-macchiato' },
-        },
-      }
-    end,
+    'arzg/vim-colors-xcode',
   },
+  --{
+  --  'folke/styler.nvim',
+  --  config = function()
+  --    require('styler').setup {
+  --      themes = {
+  --        swift = { colorscheme = 'catppuccin-macchiato' },
+  --      },
+  --    }
+  --  end,
+  --},
 }
