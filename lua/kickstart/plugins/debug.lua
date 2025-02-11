@@ -1,15 +1,8 @@
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
 -- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
+-- be extended to other languages as well.
 
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
@@ -23,6 +16,9 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+
+    -- XCodeBuild
+    'wojciech-kulik/xcodebuild.nvim',
   },
   keys = {
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -76,10 +72,70 @@ return {
       end,
       desc = 'Debug: See last session result.',
     },
+    {
+      '<leader>ll',
+      function(opts)
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.debug_without_build(opts)
+      end,
+      desc = 'Build & Debug',
+    },
+    {
+      '<leader>ld',
+      function(opts)
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.debug_without_build(opts)
+      end,
+      desc = '[D]ebug Without Building',
+    },
+    {
+      '<leader>lt',
+      function()
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.debug_tests()
+      end,
+      desc = 'Debug [T]ests',
+    },
+    {
+      '<leader>lT',
+      function()
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.debug_class_tests()
+      end,
+      desc = 'Debug Class [T]ests',
+    },
+    {
+      '<leader>lb',
+      function()
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.toggle_breakpoint()
+      end,
+      desc = 'Toggle [B]reakpoint',
+    },
+    {
+      '<leader>lB',
+      function()
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.toggle_message_breakpoint()
+      end,
+      desc = 'Toggle Message [B]reakpoint',
+    },
+    {
+      '<leader>lx',
+      function()
+        local xcodebuild = require 'xcodebuild.integrations.dap'
+        xcodebuild.terminate_session()
+      end,
+      desc = 'Terminate Debugger',
+    },
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    local xcodebuild = require 'xcodebuild.integrations.dap'
+    local codelldbPath = os.getenv 'HOME' .. '/.tools/codelldb-darwin-x64/extension/adapter/codelldb'
+    xcodebuild.setup(codelldbPath)
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -100,12 +156,32 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
+    -- dapui.setup {
+    --   -- Set icons to characters that are more likely to work in every terminal.
+    --   --    Feel free to remove or use ones that you like more! :)
+    --   --    Don't feel like these are good choices.
+    --   icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+    --   controls = {
+    --     icons = {
+    --       pause = '⏸',
+    --       play = '▶',
+    --       step_into = '⏎',
+    --       step_over = '⏭',
+    --       step_out = '⏮',
+    --       step_back = 'b',
+    --       run_last = '▶▶',
+    --       terminate = '⏹',
+    --       disconnect = '⏏',
+    --     },
+    --   },
+    -- }
+
+    ---@diagnostic disable-next-line: missing-fields
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
+        element = 'repl',
+        enabled = true,
         icons = {
           pause = '⏸',
           play = '▶',
@@ -116,6 +192,32 @@ return {
           run_last = '▶▶',
           terminate = '⏹',
           disconnect = '⏏',
+        },
+      },
+      floating = {
+        border = 'single',
+        mappings = {
+          close = { 'q', '<Esc>' },
+        },
+      },
+      layouts = {
+        {
+          elements = {
+            { id = 'stacks', size = 0.25 },
+            { id = 'scopes', size = 0.25 },
+            { id = 'breakpoints', size = 0.25 },
+            { id = 'watches', size = 0.25 },
+          },
+          position = 'left',
+          size = 60,
+        },
+        {
+          elements = {
+            { id = 'repl', size = 0.35 },
+            { id = 'console', size = 0.65 },
+          },
+          position = 'bottom',
+          size = 10,
         },
       },
     }

@@ -3,6 +3,8 @@ return {
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
+    delete_to_trash = true,
+    skip_confirm_for_simple_edits = true,
     -- default_file_explorer = false,
     columns = {
       'icon',
@@ -28,11 +30,15 @@ return {
     -- },
     view_options = {
       show_hidden = true,
+      -- natural_order = true, -- even the config I copied from says he doesn't know what it does
+      -- is_always_hidden = function(name, _)
+      --   return name == '..' or name == '.git'
+      -- end,
     },
   },
   dependencies = { { 'echasnovski/mini.icons', opts = {} } },
   init = function()
-    vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
+    vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = '[O]il Open parent directory' })
     vim.keymap.set('n', '<leader>oo', '<CMD>Oil --float<CR>', { desc = 'Open parent directory in floating window' })
   end,
 }
