@@ -181,6 +181,7 @@ return {
             },
           },
         },
+        bash = {}
       }
 
       -- Ensure the servers and tools above are installed
