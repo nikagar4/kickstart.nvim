@@ -181,7 +181,7 @@ return {
             },
           },
         },
-        bash = {}
+        bash = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -222,9 +222,9 @@ return {
             },
           },
         },
-        on_attach = function()
-          vim.cmd.colorscheme 'xcode'
-        end,
+        -- on_attach = function()
+        --   vim.cmd.colorscheme 'xcode'
+        -- end,
       }
     end,
   },
