@@ -363,7 +363,20 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            mappings = {
+              n = {
+                -- ['dd'] = function(prompt_bufnr)
+                ['dd'] = function()
+                  local selection = require('telescope.actions.state').get_selected_entry()
+                  vim.api.nvim_buf_delete(selection.bufnr, {}) -- Close the Telescope picker
+                  -- require('telescope.actions').close(prompt_bufnr)
+                end,
+              },
+            },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
