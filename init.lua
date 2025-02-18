@@ -369,8 +369,12 @@ require('lazy').setup({
               n = {
                 -- ['dd'] = function(prompt_bufnr)
                 ['dd'] = function()
-                  local selection = require('telescope.actions.state').get_selected_entry()
+                  -- this link might be useful: https://github.com/nvim-telescope/telescope.nvim/issues/2016
+                  local action_state = require 'telescope.actions.state'
+                  local selection = action_state.get_selected_entry()
                   vim.api.nvim_buf_delete(selection.bufnr, {}) -- Close the Telescope picker
+                  -- local current_picker = action_state.get_current_picker(prompt_bufnr)
+                  -- current_picker:refresh()
                   -- require('telescope.actions').close(prompt_bufnr)
                 end,
               },
