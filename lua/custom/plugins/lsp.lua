@@ -182,6 +182,7 @@ return {
           },
         },
         bash = {},
+        gopls = {},
       }
 
       -- Ensure the servers and tools above are installed
