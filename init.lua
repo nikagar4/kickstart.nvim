@@ -55,6 +55,9 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+-- Set tab size
+vim.opt.tabstop = 4
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -248,6 +251,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
+      delay = 0,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
@@ -363,10 +367,27 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = {
+          buffers = {
+            mappings = {
+              n = {
+                -- ['dd'] = function(prompt_bufnr)
+                ['dd'] = function()
+                  -- this link might be useful: https://github.com/nvim-telescope/telescope.nvim/issues/2016
+                  local action_state = require 'telescope.actions.state'
+                  local selection = action_state.get_selected_entry()
+                  vim.api.nvim_buf_delete(selection.bufnr, {}) -- Close the Telescope picker
+                  -- local current_picker = action_state.get_current_picker(prompt_bufnr)
+                  -- current_picker:refresh()
+                  -- require('telescope.actions').close(prompt_bufnr)
+                end,
+              },
+            },
+          },
+        },
         extensions = {
           ['ui-select'] = {
-            require('telescope.themes').get_dropdown,
+            require('telescope.themes').get_dropdown(),
           },
         },
       }
@@ -390,7 +411,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sw', with_normal_mode(builtin.grep_string), { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sl', builtin.live_grep, { desc = '[S]earch by [L]ive grep' })
       vim.keymap.set('n', '<leader>sg', with_normal_mode(builtin.git_status), { desc = '[S]earch by [G]it' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>sd', with_normal_mode(builtin.diagnostics), { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', with_normal_mode(builtin.buffers), { desc = '[ ] Find existing buffers' })
@@ -417,6 +438,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>sb', function()
+        builtin.grep_string {
+          grep_open_files = true,
+        }
+      end, { desc = '[Search] current word in open [B]uffers' })
     end,
   },
 
@@ -516,45 +543,6 @@ require('lazy').setup({
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
-  },
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    main = 'nvim-treesitter.configs', -- Sets main module to use for opts
-    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-    opts = {
-      ensure_installed = {
-        'swift',
-        'javascript',
-        'typescript',
-        'bash',
-        'c',
-        'diff',
-        'html',
-        'lua',
-        'luadoc',
-        'markdown',
-        'markdown_inline',
-        'query',
-        'vim',
-        'vimdoc',
-      },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        --  If you are experiencing weird indenting issues, add the language to
-        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
-      },
-      indent = { enable = true, disable = { 'ruby' } },
-    },
-    -- There are additional nvim-treesitter modules that you can use to interact
-    -- with nvim-treesitter. You should go explore a few and see what interests you:
-    --
-    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
