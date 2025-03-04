@@ -411,7 +411,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sw', with_normal_mode(builtin.grep_string), { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sl', builtin.live_grep, { desc = '[S]earch by [L]ive grep' })
       vim.keymap.set('n', '<leader>sg', with_normal_mode(builtin.git_status), { desc = '[S]earch by [G]it' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>sd', with_normal_mode(builtin.diagnostics), { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', with_normal_mode(builtin.buffers), { desc = '[ ] Find existing buffers' })
@@ -438,6 +438,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      vim.keymap.set('n', '<leader>sb', function()
+        builtin.grep_string {
+          grep_open_files = true,
+        }
+      end, { desc = '[Search] current word in open [B]uffers' })
     end,
   },
 
