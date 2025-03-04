@@ -33,15 +33,11 @@ return {
     name = 'xcode',
   },
   {
-    'savq/melange-nvim',
-    -- priority = 1000,
-  },
-  {
     'AlexvZyl/nordic.nvim',
+    name = 'nordic',
   },
-  {
-    'shaunsingh/nord.nvim',
-  },
+  -- UNUSED GENERAL 'frenzyexists/aquarium-vim', 'savq/melange-nvim', 'shaunsingh/nord.nvim', 'fcancelinha/nordern.nvim'
+  -- RUST THEMES 'xiantang/darcula-dark.nvim', 'cryptomilk/nightcity.nvim'
   --{
   --  'folke/styler.nvim',
   --  config = function()

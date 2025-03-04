@@ -51,6 +51,7 @@ return {
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- Find references for the word under your cursor.
+          -- TODO: make this open in normal mode instead of insert mode
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
@@ -214,7 +215,8 @@ return {
           end,
         },
       }
-      require('lspconfig').sourcekit.setup {
+      local lspconfig = require 'lspconfig'
+      lspconfig.sourcekit.setup {
         -- cmd = { '/usr/local/swift/usr/bin/sourcekit-lsp' },
         capabilities = {
           workspace = {
@@ -226,6 +228,16 @@ return {
         -- on_attach = function()
         --   vim.cmd.colorscheme 'xcode'
         -- end,
+      }
+      -- lspconfig.rust_analyzer.setup {
+      --   on_attach = function()
+      --     vim.cmd.colorscheme 'dracula-dark'
+      --   end,
+      -- }
+      lspconfig.gopls.setup {
+        on_attach = function()
+          vim.cmd.colorscheme 'nordic'
+        end,
       }
     end,
   },
