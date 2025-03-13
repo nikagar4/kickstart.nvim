@@ -4,7 +4,7 @@ return {
   dependencies = {
     'nvim-telescope/telescope.nvim',
     'MunifTanjim/nui.nvim',
-    'folke/snacks.nvim',
+    -- 'folke/snacks.nvim',
   },
   config = function()
     require('xcodebuild').setup {
@@ -30,7 +30,7 @@ return {
     vim.keymap.set('n', '<leader>xR', '<cmd>XcodebuildRun<cr>', { desc = '[R]un Project' })
     vim.keymap.set('n', '<leader>xt', '<cmd>XcodebuildTest<cr>', { desc = 'Run [T]ests' })
     vim.keymap.set('n', '<leader>xT', '<cmd>XcodebuildTestClass<cr>', { desc = 'Run [T]his Test Class' })
-    vim.keymap.set('n', '<leader>X', '<cmd>XcodebuildPicker<cr>', { desc = 'Show All [X]codebuild Actions' })
+    vim.keymap.set('n', '<leader>xa', '<cmd>XcodebuildPicker<cr>', { desc = 'Show All [X]codebuild Actions' })
     vim.keymap.set('n', '<leader>xd', '<cmd>XcodebuildSelectDevice<cr>', { desc = 'Select [D]evice' })
     vim.keymap.set('n', '<leader>xp', '<cmd>XcodebuildPreviewToggle<cr>', { desc = 'Toggle [P]review' })
     vim.keymap.set('n', '<leader>xP', '<cmd>XcodebuildSelectTestPlan<cr>', { desc = 'Select Test [P]lan' })
