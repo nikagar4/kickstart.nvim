@@ -115,85 +115,10 @@ vim.opt.scrolloff = 10
 vim.opt.wrap = true
 
 -- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- Keybinds to jump in the quickfix buffer
-vim.keymap.set('n', '[q', vim.cmd.cnext, { desc = 'Jump to the next item in quickfix' })
-vim.keymap.set('n', ']q', vim.cmd.cprevious, { desc = 'Jump to the previous item in quickfix' })
-
--- Keybind to open project netrw
--- Disabled since Oil is enabled
--- vim.keymap.set('n', '<leader>ex', vim.cmd.Ex, { desc = 'Open project netrw' })
-
--- Keybinds to move selection up and down
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
-
--- Keybinds for cursor movement
--- vim.keymap.set('n', '^', '0')
--- vim.keymap.set('n', '0', '^')
-
--- Add a save as sudo command for files not opened as sudo
--- Link: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work
-vim.api.nvim_create_user_command('SaveAsSudo', function()
-  vim.cmd 'w !sudo tee %'
-end, {})
+require 'custom.keymaps'
 
 -- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
-
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
--- [[ Install `lazy.nvim` plugin manager ]]
---    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
-  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
-  if vim.v.shell_error ~= 0 then
-    error('Error cloning lazy.nvim:\n' .. out)
-  end
-end ---@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
+require 'custom.autocommands'
 
 -- [[ Configure and install plugins ]]
 --
@@ -302,6 +227,9 @@ require('lazy').setup({
         { '<leader>x', group = '[X]code' },
         { '<leader>o', group = '[O]il' },
         { '<leader>l', group = '[L]ldb' },
+        { '<leader>m', group = '[M]arkdown' },
+        { '<leader>f', group = '[F]ormatter' },
+        { '<leader>b', group = '[B]uffers' },
       },
     },
   },
@@ -367,8 +295,37 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
+        defaults = {
+          path_display = { 'truncate' },
+          -- layout_config = {
+          --   horizontal = {
+          --     width = 0.95,
+          --     preview_cutoff = 120, -- DEFAULTS
+          --     prompt_position = 'bottom', -- DEFAULTS
+          --     height = 0.95,
+          --   },
+          --   vertical = {
+          --     width = 0.95,
+          --     preview_cutoff = 40, -- DEFAULTS
+          --     prompt_position = 'bottom', -- DEFAULTS
+          --     height = 0.95,
+          --   },
+          -- },
+        },
         pickers = {
+          grep_string = {
+            initial_mode = 'normal',
+          },
+          git_status = {
+            initial_mode = 'normal',
+            theme = 'dropdown',
+          },
+          diagnostics = {
+            initial_mode = 'normal',
+          },
           buffers = {
+            initial_mode = 'normal',
+            theme = 'dropdown',
             mappings = {
               n = {
                 -- ['dd'] = function(prompt_bufnr)
@@ -399,22 +356,17 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      local with_normal_mode = function(fn)
-        return function()
-          fn { initial_mode = 'normal' }
-        end
-      end
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-      vim.keymap.set('n', '<leader>sw', with_normal_mode(builtin.grep_string), { desc = '[S]earch current [W]ord' })
+      vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sl', builtin.live_grep, { desc = '[S]earch by [L]ive grep' })
-      vim.keymap.set('n', '<leader>sg', with_normal_mode(builtin.git_status), { desc = '[S]earch by [G]it' })
-      vim.keymap.set('n', '<leader>sd', with_normal_mode(builtin.diagnostics), { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>sg', builtin.git_status, { desc = '[S]earch by [G]it' })
+      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', with_normal_mode(builtin.buffers), { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -461,49 +413,6 @@ require('lazy').setup({
     },
   },
   { 'Bilal2453/luvit-meta', lazy = true },
-  { -- Autoformat
-    'stevearc/conform.nvim',
-    event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
-    keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
-    },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        local lsp_format_opt
-        if disable_filetypes[vim.bo[bufnr].filetype] then
-          lsp_format_opt = 'never'
-        else
-          lsp_format_opt = 'fallback'
-        end
-        return {
-          timeout_ms = 500,
-          lsp_format = lsp_format_opt,
-        }
-      end,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        -- swift = { 'swiftformat' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
-      },
-    },
-  },
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
