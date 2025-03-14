@@ -23,7 +23,7 @@ return {
     },
     sections = {
       lualine_a = { 'searchcount', 'mode' },
-      lualine_b = { 'branch', 'diff', 'diagnostics' },
+      lualine_b = { 'diff', 'diagnostics' },
       lualine_c = { 'buffers' },
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = { 'progress' },
