@@ -1,5 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
+  -- dir = vim.fn.expand '$HOME' .. '/Developer/Lua/lualine.nvim',
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
     options = {

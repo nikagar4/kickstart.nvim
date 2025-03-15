@@ -34,6 +34,7 @@ return {
   },
   {
     'AlexvZyl/nordic.nvim',
+    -- dir = vim.fn.expand '$HOME' .. '/Developer/Lua/nordic.nvim',
     name = 'nordic',
   },
   -- UNUSED GENERAL 'frenzyexists/aquarium-vim', 'savq/melange-nvim', 'shaunsingh/nord.nvim', 'fcancelinha/nordern.nvim'
