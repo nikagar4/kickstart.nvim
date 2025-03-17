@@ -157,7 +157,7 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = {}, -- TODO: make sure it's the correct python LSP
+        pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --

@@ -323,6 +323,9 @@ require('lazy').setup({
           diagnostics = {
             initial_mode = 'normal',
           },
+          resume = {
+            initial_mode = 'normal',
+          },
           buffers = {
             initial_mode = 'normal',
             theme = 'dropdown',
