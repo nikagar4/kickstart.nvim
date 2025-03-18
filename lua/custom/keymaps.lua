@@ -32,8 +32,8 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Keybinds to jump in the quickfix buffer
-vim.keymap.set('n', '[q', vim.cmd.cnext, { desc = 'Jump to the next item in quickfix' })
-vim.keymap.set('n', ']q', vim.cmd.cprevious, { desc = 'Jump to the previous item in quickfix' })
+vim.keymap.set('n', ']q', vim.cmd.cnext, { desc = 'Jump to the next item in quickfix' })
+vim.keymap.set('n', '[q', vim.cmd.cprevious, { desc = 'Jump to the previous item in quickfix' })
 
 -- Keybind to open project netrw
 -- Disabled since Oil is enabled
@@ -42,6 +42,13 @@ vim.keymap.set('n', ']q', vim.cmd.cprevious, { desc = 'Jump to the previous item
 -- Keybinds to move selection up and down
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
+
+-- Register keymaps
+-- Paste without overwriting register
+vim.keymap.set('x', '<leader>p', '"_dP')
+-- Yank into system clipboard
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y')
 
 -- Preview current buffer in glow (needs glow and tmux to be installed)
 vim.keymap.set('n', '<leader>mo', function()
@@ -65,8 +72,8 @@ vim.keymap.set('n', '<leader>mp', function()
 end, { desc = '[M]arkdown [P]review' })
 
 -- Buffers
-vim.keymap.set('n', '<leader>bl', '<cmd>bnext<CR>', { desc = '[B]uffers Next' })
-vim.keymap.set('n', '<leader>bh', '<cmd>bprev<CR>', { desc = '[B]uffers Previous' })
+vim.keymap.set('n', ']b', '<cmd>bnext<CR>', { desc = 'Next Buffer' })
+vim.keymap.set('n', '[b', '<cmd>bprev<CR>', { desc = 'Previous Buffer' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[B]uffer [D]elete' })
 vim.keymap.set('n', '<leader>bS', '<cmd>mks! .session.nvim<CR>', { desc = '[B]uffers [S]ave' })
 vim.keymap.set('n', '<leader>bL', '<cmd>so .session.nvim<CR>', { desc = '[B]uffers [L]oad' })

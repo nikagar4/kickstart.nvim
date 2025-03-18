@@ -94,16 +94,16 @@ return {
         },
       },
       layouts = {
-        {
-          elements = {
-            { id = 'stacks', size = 0.25 },
-            { id = 'scopes', size = 0.25 },
-            { id = 'breakpoints', size = 0.25 },
-            { id = 'watches', size = 0.25 },
-          },
-          position = 'right',
-          size = 60,
-        },
+        -- {
+        --   elements = {
+        --     { id = 'stacks', size = 0.25 },
+        --     { id = 'scopes', size = 0.25 },
+        --     { id = 'breakpoints', size = 0.25 },
+        --     { id = 'watches', size = 0.25 },
+        --   },
+        --   position = 'right',
+        --   size = 60,
+        -- },
         {
           elements = {
             { id = 'console', size = 0.65 },
