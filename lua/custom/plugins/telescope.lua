@@ -54,23 +54,29 @@ return {
       --   },
       -- },
       defaults = {
-        path_display = { 'truncate' },
-        -- layout_config = {
-        --   horizontal = {
-        --     width = 0.95,
-        --     preview_cutoff = 120, -- DEFAULTS
-        --     prompt_position = 'bottom', -- DEFAULTS
-        --     height = 0.95,
-        --   },
-        --   vertical = {
-        --     width = 0.95,
-        --     preview_cutoff = 40, -- DEFAULTS
-        --     prompt_position = 'bottom', -- DEFAULTS
-        --     height = 0.95,
-        --   },
-        -- },
+        wrap_results = true,
+        sorting_strategy = 'ascending',
+        layout_config = {
+          horizontal = {
+            prompt_position = 'top',
+          },
+        },
       },
       pickers = {
+        help_tags = {
+          theme = 'ivy',
+          mappings = {
+            i = {
+              ['<CR>'] = 'select_vertical',
+            },
+            n = {
+              ['<CR>'] = 'select_vertical',
+            },
+          },
+        },
+        find_files = {
+          theme = 'ivy',
+        },
         grep_string = {
           initial_mode = 'normal',
         },
@@ -99,17 +105,6 @@ return {
                 -- current_picker:refresh()
                 -- require('telescope.actions').close(prompt_bufnr)
               end,
-            },
-          },
-        },
-        help_tags = {
-          theme = 'ivy',
-          mappings = {
-            i = {
-              ['<CR>'] = 'select_vertical',
-            },
-            n = {
-              ['<CR>'] = 'select_vertical',
             },
           },
         },
@@ -166,11 +161,6 @@ return {
         prompt_title = 'Live Grep in Open Files',
       }
     end, { desc = '[S]earch [/] in Open Files' })
-
-    -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>sn', function()
-      builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[S]earch [N]eovim files' })
 
     vim.keymap.set('n', '<leader>sb', function()
       builtin.grep_string {

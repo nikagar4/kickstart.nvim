@@ -77,6 +77,12 @@ vim.keymap.set('n', '[b', '<cmd>bprev<CR>', { desc = 'Previous Buffer' })
 vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[B]uffer [D]elete' })
 vim.keymap.set('n', '<leader>bS', '<cmd>mks! .session.nvim<CR>', { desc = '[B]uffers [S]ave' })
 vim.keymap.set('n', '<leader>bL', '<cmd>so .session.nvim<CR>', { desc = '[B]uffers [L]oad' })
+vim.keymap.set('n', '<leader>br', '<cmd>e<CR>', { desc = '[B]uffers [R]eload' })
+
+-- Open
+vim.keymap.set('n', '<leader>od', function()
+  vim.diagnostic.open_float(nil, { focus = false })
+end, { desc = '[O]pen [D]iagnostics' })
 
 -- Keybinds for cursor movement
 -- vim.keymap.set('n', '^', '0')

@@ -39,6 +39,5 @@ return {
   dependencies = { { 'echasnovski/mini.icons', opts = {} } },
   init = function()
     vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = '[O]il Open parent directory' })
-    vim.keymap.set('n', '<leader>oo', '<CMD>Oil --float<CR>', { desc = 'Open parent directory in floating window' })
   end,
 }
