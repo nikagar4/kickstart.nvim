@@ -55,6 +55,7 @@ return {
       -- },
       defaults = {
         wrap_results = true,
+        path_display = { shorten = 4 },
         sorting_strategy = 'ascending',
         layout_config = {
           horizontal = {

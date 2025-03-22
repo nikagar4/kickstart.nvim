@@ -200,6 +200,7 @@ require('lazy').setup({
         { '<leader>l', group = '[L]ldb' },
         { '<leader>f', group = '[F]ormatter' },
         { '<leader>b', group = '[B]uffers' },
+        { '<leader>p', group = '[P]roject' },
       },
     },
   },

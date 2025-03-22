@@ -45,7 +45,7 @@ vim.keymap.set('v', 'K', ":m '>-2<CR>gv=gv")
 
 -- Register keymaps
 -- Paste without overwriting register
-vim.keymap.set('x', '<leader>p', '"_dP')
+-- vim.keymap.set('x', '<leader>p', '"_dP')
 -- Yank into system clipboard
 vim.keymap.set('n', '<leader>y', '"+y')
 vim.keymap.set('v', '<leader>y', '"+y')
@@ -78,6 +78,10 @@ vim.keymap.set('n', '<leader>bd', '<cmd>bd<CR>', { desc = '[B]uffer [D]elete' })
 vim.keymap.set('n', '<leader>bS', '<cmd>mks! .session.nvim<CR>', { desc = '[B]uffers [S]ave' })
 vim.keymap.set('n', '<leader>bL', '<cmd>so .session.nvim<CR>', { desc = '[B]uffers [L]oad' })
 vim.keymap.set('n', '<leader>br', '<cmd>e<CR>', { desc = '[B]uffers [R]eload' })
+vim.keymap.set('n', '<leader>bp', function()
+  print(vim.api.nvim_buf_get_name(0))
+end, { desc = '[B]uffers [P]ath' })
+vim.keymap.set('n', '<leader>bo', '<cmd>%bd|e#<CR>', { desc = '[B]uffer Delete [O]thers' })
 
 -- Open
 vim.keymap.set('n', '<leader>od', function()

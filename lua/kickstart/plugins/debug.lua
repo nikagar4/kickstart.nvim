@@ -41,8 +41,8 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     -- [[ Xcodebuild keymaps ]]
-    vim.keymap.set('n', '<leader>ll', xcodebuild.build_and_debug, { desc = 'Build & Debug' })
-    vim.keymap.set('n', '<leader>ld', xcodebuild.debug_without_build, { desc = '[D]ebug Without Building' })
+    vim.keymap.set('n', '<leader>pD', xcodebuild.build_and_debug, { desc = 'Build & Debug' })
+    vim.keymap.set('n', '<leader>pd', xcodebuild.debug_without_build, { desc = '[D]ebug Without Building' })
     vim.keymap.set('n', '<leader>lt', xcodebuild.debug_tests, { desc = 'Debug [T]ests' })
     vim.keymap.set('n', '<leader>lT', xcodebuild.debug_class_tests, { desc = 'Debug Class [T]ests' })
     vim.keymap.set('n', '<leader>lb', xcodebuild.toggle_breakpoint, { desc = 'Toggle [B]reakpoint' })
