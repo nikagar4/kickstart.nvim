@@ -25,9 +25,9 @@ return {
     }
 
     vim.keymap.set('n', '<leader>xl', '<cmd>XcodebuildToggleLogs<cr>', { desc = 'Toggle Xcodebuild [L]ogs' })
-    vim.keymap.set('n', '<leader>xb', '<cmd>XcodebuildBuild<cr>', { desc = '[B]uild Project' })
-    vim.keymap.set('n', '<leader>xr', '<cmd>XcodebuildBuildRun<cr>', { desc = 'Build & [R]un Project' })
-    vim.keymap.set('n', '<leader>xR', '<cmd>XcodebuildRun<cr>', { desc = '[R]un Project' })
+    vim.keymap.set('n', '<leader>pb', '<cmd>XcodebuildBuild<cr>', { desc = '[B]uild' })
+    vim.keymap.set('n', '<leader>px', '<cmd>XcodebuildBuildRun<cr>', { desc = 'Build & Run' })
+    vim.keymap.set('n', '<leader>pr', '<cmd>XcodebuildRun<cr>', { desc = '[R]un' })
     vim.keymap.set('n', '<leader>xt', '<cmd>XcodebuildTest<cr>', { desc = 'Run [T]ests' })
     vim.keymap.set('n', '<leader>xT', '<cmd>XcodebuildTestClass<cr>', { desc = 'Run [T]his Test Class' })
     vim.keymap.set('n', '<leader>xa', '<cmd>XcodebuildPicker<cr>', { desc = 'Show All [X]codebuild Actions' })
@@ -38,6 +38,7 @@ return {
     vim.keymap.set('n', '<leader>xc', '<cmd>XcodebuildCancel<cr>', { desc = '[C]ancel Build' })
     vim.keymap.set('n', '<leader>xC', '<cmd>XcodebuildShowCodeCoverageReport<cr>', { desc = 'Show Code [C]overage Report' })
     vim.keymap.set('n', '<leader>xq', '<cmd>Telescope quickfix<cr>', { desc = 'Show [Q]uickFix List' })
-    vim.keymap.set('n', '<leader>xx', '<cmd>XcodebuildSetup<cr>', { desc = 'Run [X]codebuild setup' })
+    vim.keymap.set('n', '<leader>xS', '<cmd>XcodebuildSetup<cr>', { desc = 'Run [X]codebuild [S]etup' })
+    -- vim.keymap.set('n', '<leader>xx', '<cmd>XcodebuildCancel<cr>', { desc = '[X]codebuild terminate command' })
   end,
 }

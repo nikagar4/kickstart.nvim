@@ -12,9 +12,6 @@ return {
   cmd = 'Neotree',
   keys = {
     { '\\', ':Neotree left<CR>', desc = 'NeoTree reveal', silent = true },
-    { '<leader>nn', ':Neotree float<CR>', desc = '[N]eotree reveal in center', silent = true },
-    { '<leader>nb', ':Neotree buffers float<CR>', desc = '[N]eotree [B]uffers in center', silent = true },
-    { '<leader>ns', ':Neotree git_status float<CR>', desc = '[N]eotree git [S]tatus in center', silent = true },
   },
   opts = {
     filesystem = {

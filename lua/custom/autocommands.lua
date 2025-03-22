@@ -26,19 +26,20 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Open diagnostic below the cursor ]]
 -- See (https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window)
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-  group = vim.api.nvim_create_augroup('float_diagnostic', { clear = true }),
-  callback = function()
-    vim.diagnostic.open_float(nil, { focus = false })
-  end,
-})
-
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-  group = vim.api.nvim_create_augroup('float_diagnostic_cursor', { clear = true }),
-  callback = function()
-    vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
-  end,
-})
+-- [[ Moved this to keymaps <leader>od ]]
+-- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+--   group = vim.api.nvim_create_augroup('float_diagnostic', { clear = true }),
+--   callback = function()
+--     vim.diagnostic.open_float(nil, { focus = false })
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+--   group = vim.api.nvim_create_augroup('float_diagnostic_cursor', { clear = true }),
+--   callback = function()
+--     vim.diagnostic.open_float(nil, { focus = false, scope = 'cursor' })
+--   end,
+-- })
 
 -- Add a save as sudo command for files not opened as sudo
 -- Link: https://stackoverflow.com/questions/2600783/how-does-the-vim-write-with-sudo-trick-work

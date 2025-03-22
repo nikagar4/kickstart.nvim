@@ -195,13 +195,12 @@ require('lazy').setup({
         { '<leader>w', group = '[W]orkspace' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-        -- { '<leader>n', group = '[N]eotree' },
         { '<leader>x', group = '[X]code' },
-        { '<leader>o', group = '[O]il' },
+        { '<leader>o', group = '[O]pen' },
         { '<leader>l', group = '[L]ldb' },
-        { '<leader>m', group = '[M]arkdown' },
         { '<leader>f', group = '[F]ormatter' },
         { '<leader>b', group = '[B]uffers' },
+        { '<leader>p', group = '[P]roject' },
       },
     },
   },
@@ -281,7 +280,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`

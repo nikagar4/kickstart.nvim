@@ -54,23 +54,30 @@ return {
       --   },
       -- },
       defaults = {
-        path_display = { 'truncate' },
-        -- layout_config = {
-        --   horizontal = {
-        --     width = 0.95,
-        --     preview_cutoff = 120, -- DEFAULTS
-        --     prompt_position = 'bottom', -- DEFAULTS
-        --     height = 0.95,
-        --   },
-        --   vertical = {
-        --     width = 0.95,
-        --     preview_cutoff = 40, -- DEFAULTS
-        --     prompt_position = 'bottom', -- DEFAULTS
-        --     height = 0.95,
-        --   },
-        -- },
+        wrap_results = true,
+        path_display = { shorten = 4 },
+        sorting_strategy = 'ascending',
+        layout_config = {
+          horizontal = {
+            prompt_position = 'top',
+          },
+        },
       },
       pickers = {
+        help_tags = {
+          theme = 'ivy',
+          mappings = {
+            i = {
+              ['<CR>'] = 'select_vertical',
+            },
+            n = {
+              ['<CR>'] = 'select_vertical',
+            },
+          },
+        },
+        find_files = {
+          theme = 'ivy',
+        },
         grep_string = {
           initial_mode = 'normal',
         },
@@ -79,6 +86,9 @@ return {
           theme = 'dropdown',
         },
         diagnostics = {
+          initial_mode = 'normal',
+        },
+        resume = {
           initial_mode = 'normal',
         },
         buffers = {
@@ -99,16 +109,11 @@ return {
             },
           },
         },
-        help_tags = {
-          theme = 'ivy',
-          mappings = {
-            i = {
-              ['<CR>'] = 'select_vertical',
-            },
-            n = {
-              ['<CR>'] = 'select_vertical',
-            },
-          },
+        lsp_references = {
+          initial_mode = 'normal',
+        },
+        lsp_definitions = {
+          initial_mode = 'normal',
         },
       },
       extensions = {
@@ -157,11 +162,6 @@ return {
         prompt_title = 'Live Grep in Open Files',
       }
     end, { desc = '[S]earch [/] in Open Files' })
-
-    -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>sn', function()
-      builtin.find_files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[S]earch [N]eovim files' })
 
     vim.keymap.set('n', '<leader>sb', function()
       builtin.grep_string {
