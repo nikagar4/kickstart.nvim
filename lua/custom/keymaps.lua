@@ -87,6 +87,7 @@ vim.keymap.set('n', '<leader>bo', '<cmd>%bd|e#<CR>', { desc = '[B]uffer Delete [
 vim.keymap.set('n', '<leader>od', function()
   vim.diagnostic.open_float(nil, { focus = false })
 end, { desc = '[O]pen [D]iagnostics' })
+vim.keymap.set('n', '<leader>or', '<cmd>reg<CR>', { desc = '[O]pen [R]egister' })
 
 -- Keybinds for cursor movement
 -- vim.keymap.set('n', '^', '0')
