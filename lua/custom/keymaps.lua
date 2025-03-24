@@ -87,6 +87,9 @@ vim.keymap.set('n', '<leader>bo', '<cmd>%bd|e#<CR>', { desc = '[B]uffer Delete [
 vim.keymap.set('n', '<leader>od', function()
   vim.diagnostic.open_float(nil, { focus = false })
 end, { desc = '[O]pen [D]iagnostics' })
+vim.keymap.set('n', '<leader>or', '<cmd>reg<CR>', { desc = '[O]pen [R]egister' })
+-- lua/custom/plugins/harpoon.lua - <leader>oh open harpoon
+-- lua/custom/plugins/which-key.lua - <leader>ow open which-key
 
 -- Keybinds for cursor movement
 -- vim.keymap.set('n', '^', '0')
