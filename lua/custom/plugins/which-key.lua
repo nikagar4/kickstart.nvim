@@ -68,6 +68,10 @@ return {
       { '<leader>l', group = '[L]ldb' },
       { '<leader>b', group = '[B]uffers' },
       { '<leader>p', group = '[P]roject' },
+      { '<leader>pd', group = '[P]roject [D]ebug' },
+      { '<leader>pb', group = '[P]roject [B]uild' },
+      { '<leader>pt', group = '[P]roject [T]est' },
+      { '<leader>ps', group = '[P]roject [S]elect' },
     },
   },
   config = function(_, opts)
