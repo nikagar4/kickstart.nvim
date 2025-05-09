@@ -4,7 +4,9 @@ return {
   build = ':TSUpdate',
   main = 'nvim-treesitter.configs', -- Sets main module to use for opts
   -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-  -- To setup textobjects watch https://www.youtube.com/watch?v=CEMPq_r8UYQ
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
   opts = {
     ensure_installed = {
       'swift',
@@ -32,6 +34,15 @@ return {
       additional_vim_regex_highlighting = { 'ruby' },
     },
     indent = { enable = true, disable = { 'ruby' } },
+    -- incremental_selection = {
+    --   enable = true,
+    --   keymaps = {
+    --     init_selection = '<C-space>',
+    --     node_incremental = '<C-space>',
+    --     scope_incremental = false,
+    --     node_decremental = '<C-space>',
+    --   },
+    -- },
   },
   -- There are additional nvim-treesitter modules that you can use to interact
   -- with nvim-treesitter. You should go explore a few and see what interests you:
