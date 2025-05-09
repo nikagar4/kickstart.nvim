@@ -46,7 +46,12 @@ return {
     sections = {
       lualine_a = { 'searchcount', 'mode' },
       lualine_b = { 'diff', 'diagnostics' },
-      lualine_c = { 'buffers' },
+      lualine_c = {
+        { "'󰣪 ' .. vim.g.xcodebuild_last_status", color = { fg = 'Gray' } },
+        { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#9ccfd8' } },
+        { "' ' .. vim.g.xcodebuild_scheme", color = { fg = 'Gray' } },
+        { xcodebuild_device, color = { fg = '#ebbcba' } },
+      },
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
@@ -62,10 +67,10 @@ return {
     tabline = {},
     winbar = {
       lualine_c = {
-        { "'󰣪 ' .. vim.g.xcodebuild_last_status", color = { fg = 'Gray' } },
-        { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#a6e3a1', bg = '#161622' } },
-        { "' ' .. vim.g.xcodebuild_scheme", color = { fg = 'Gray' } },
-        { xcodebuild_device, color = { fg = '#f9e2af' } },
+        {
+          'buffers',
+          max_length = vim.o.columns,
+        },
       },
     },
     inactive_winbar = {},
