@@ -19,10 +19,11 @@ return {
     'rose-pine/neovim',
     name = 'rose-pine',
     -- priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'rose-pine-moon'
-      vim.cmd.hi 'Comment gui=none'
-    end,
+    -- init = function()
+    --   vim.cmd.colorscheme 'rose-pine-dawn'
+    --   vim.cmd.hi 'Comment gui=none'
+    --   vim.cmd.hi 'Normal guibg=none ctermbg=none'
+    -- end,
   },
   {
     'catppuccin/nvim',

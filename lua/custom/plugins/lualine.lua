@@ -1,3 +1,24 @@
+local function xcodebuild_device()
+  if vim.g.xcodebuild_platform == 'macOS' then
+    return ' macOS'
+  end
+
+  local deviceIcon = ''
+  if vim.g.xcodebuild_platform:match 'watch' then
+    deviceIcon = '􀟤'
+  elseif vim.g.xcodebuild_platform:match 'tv' then
+    deviceIcon = '􀡴 '
+  elseif vim.g.xcodebuild_platform:match 'vision' then
+    deviceIcon = '􁎖 '
+  end
+
+  if vim.g.xcodebuild_os then
+    return deviceIcon .. ' ' .. vim.g.xcodebuild_device_name .. ' (' .. vim.g.xcodebuild_os .. ')'
+  end
+
+  return deviceIcon .. ' ' .. vim.g.xcodebuild_device_name
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   -- dir = vim.fn.expand '$HOME' .. '/Developer/Lua/lualine.nvim',
@@ -25,7 +46,12 @@ return {
     sections = {
       lualine_a = { 'searchcount', 'mode' },
       lualine_b = { 'diff', 'diagnostics' },
-      lualine_c = { 'buffers' },
+      lualine_c = {
+        { "'󰣪 ' .. vim.g.xcodebuild_last_status", color = { fg = 'Gray' } },
+        { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#9ccfd8' } },
+        { "' ' .. vim.g.xcodebuild_scheme", color = { fg = 'Gray' } },
+        { xcodebuild_device, color = { fg = '#ebbcba' } },
+      },
       lualine_x = { 'encoding', 'fileformat', 'filetype' },
       lualine_y = { 'progress' },
       lualine_z = { 'location' },
@@ -39,7 +65,14 @@ return {
       lualine_z = {},
     },
     tabline = {},
-    winbar = {},
+    winbar = {
+      lualine_c = {
+        {
+          'buffers',
+          max_length = vim.o.columns,
+        },
+      },
+    },
     inactive_winbar = {},
     extensions = {},
   },

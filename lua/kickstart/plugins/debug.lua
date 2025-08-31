@@ -41,13 +41,13 @@ return {
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
     -- [[ Xcodebuild keymaps ]]
-    vim.keymap.set('n', '<leader>pD', xcodebuild.build_and_debug, { desc = 'Build & Debug' })
-    vim.keymap.set('n', '<leader>pd', xcodebuild.debug_without_build, { desc = '[D]ebug Without Building' })
-    vim.keymap.set('n', '<leader>lt', xcodebuild.debug_tests, { desc = 'Debug [T]ests' })
-    vim.keymap.set('n', '<leader>lT', xcodebuild.debug_class_tests, { desc = 'Debug Class [T]ests' })
-    vim.keymap.set('n', '<leader>lb', xcodebuild.toggle_breakpoint, { desc = 'Toggle [B]reakpoint' })
-    vim.keymap.set('n', '<leader>lB', xcodebuild.toggle_message_breakpoint, { desc = 'Toggle Message [B]reakpoint' })
-    vim.keymap.set('n', '<leader>lx', xcodebuild.terminate_session, { desc = 'Terminate Debugger' })
+    vim.keymap.set('n', '<leader>pdr', xcodebuild.build_and_debug, { desc = '[D]ebug & [B]uild' })
+    vim.keymap.set('n', '<leader>pdd', xcodebuild.debug_without_build, { desc = '[D]ebug [W]ithout Building' })
+    -- vim.keymap.set('n', '<leader>lt', xcodebuild.debug_tests, { desc = 'Debug [T]ests' })
+    -- vim.keymap.set('n', '<leader>lT', xcodebuild.debug_class_tests, { desc = 'Debug Class [T]ests' })
+    -- vim.keymap.set('n', '<leader>lb', xcodebuild.toggle_breakpoint, { desc = 'Toggle [B]reakpoint' })
+    -- vim.keymap.set('n', '<leader>lB', xcodebuild.toggle_message_breakpoint, { desc = 'Toggle Message [B]reakpoint' })
+    vim.keymap.set('n', '<leader>pdt', xcodebuild.terminate_session, { desc = '[D]ebugger [T]erminate' })
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with

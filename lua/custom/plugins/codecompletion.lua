@@ -34,9 +34,9 @@ return {
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
           -- Select the [n]ext item
-          ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<M-NL>'] = cmp.mapping.select_next_item(),
           -- Select the [p]revious item
-          ['<C-p>'] = cmp.mapping.select_prev_item(),
+          ['<M-C-K>'] = cmp.mapping.select_prev_item(),
 
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -66,9 +66,11 @@ return {
           --
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
+          ['<C-l>'] = cmp.mapping(function(original)
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
+            else
+              original()
             end
           end, { 'i', 's' }),
           ['<C-h>'] = cmp.mapping(function()
@@ -80,8 +82,8 @@ return {
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 
-          -- Make 'enter' key select the completion
-          ['<CR>'] = cmp.mapping.confirm { select = true },
+          -- Make 'Caps-L' key select the completion
+          ['<M-C-L>'] = cmp.mapping.confirm { select = true },
           -- Super-tab behavior
           ['<tab>'] = cmp.mapping(function(original)
             if cmp.visible() then
