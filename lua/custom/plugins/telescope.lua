@@ -83,7 +83,6 @@ return {
         },
         git_status = {
           initial_mode = 'normal',
-          theme = 'dropdown',
         },
         diagnostics = {
           initial_mode = 'normal',
@@ -93,7 +92,6 @@ return {
         },
         buffers = {
           initial_mode = 'normal',
-          theme = 'dropdown',
           mappings = {
             n = {
               -- ['dd'] = function(prompt_bufnr)
