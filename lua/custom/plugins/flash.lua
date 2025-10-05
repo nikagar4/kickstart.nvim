@@ -4,11 +4,11 @@ return {
   -- stylua: ignore
   keys = {
     -- { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "<leader>f", mode = { "n" }, function() require("flash").jump() end, desc = "Flash" },
-    -- { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "<leader>f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "[F]lash" },
+    { "<leader>t", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash [T]reesitter" },
     -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
     -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    -- { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    { "<c-f>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
   },
   ---@type Flash.Config
   opts = {
@@ -181,7 +181,7 @@ return {
         -- show jump labels
         jump_labels = false,
         -- set to `false` to use the current line only
-        multi_line = true,
+        multi_line = false,
         -- When using jump labels, don't use these keys
         -- This allows using those keys directly after the motion
         label = { exclude = 'hjkliardc' },

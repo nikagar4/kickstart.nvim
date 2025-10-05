@@ -91,6 +91,6 @@ vim.keymap.set('n', '<leader>or', '<cmd>reg<CR>', { desc = '[O]pen [R]egister' }
 -- lua/custom/plugins/harpoon.lua - <leader>oh open harpoon
 -- lua/custom/plugins/which-key.lua - <leader>ow open which-key
 
--- Keybinds for cursor movement
--- vim.keymap.set('n', '^', '0')
--- vim.keymap.set('n', '0', '^')
+-- [[ MARKS ]]
+vim.keymap.set('n', '<M-Tab>', "'i", { desc = 'Jump to mark I' })
+vim.keymap.set('n', '<M-C-O>', "'o", { desc = 'Jump to mark O' })
