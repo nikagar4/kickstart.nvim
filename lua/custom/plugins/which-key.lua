@@ -60,7 +60,6 @@ return {
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
       { '<leader>w', group = '[W]orkspace' },
-      { '<leader>t', group = '[T]oggle' },
       { '<leader>h', group = '[H]arpoon' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       { '<leader>x', group = '[X]code' },
