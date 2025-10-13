@@ -62,6 +62,10 @@ return {
             prompt_position = 'top',
           },
         },
+        mappings = {
+          i = { ['<c-q>'] = 'send_to_qflist' },
+          n = { ['<c-q>'] = 'send_to_qflist' },
+        },
       },
       pickers = {
         help_tags = {
@@ -140,11 +144,15 @@ return {
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>si', function()
-      builtin.grep_string { search = vim.fn.input '>' }
+      local search_term = vim.fn.input '>'
+      if search_term ~= '' then
+        builtin.grep_string { search = search_term }
+      end
     end, { desc = '[S]earch [I]nserted word' })
     vim.keymap.set('n', '<leader>sl', builtin.live_grep, { desc = '[S]earch by [L]ive grep' })
     vim.keymap.set('n', '<leader>sg', builtin.git_status, { desc = '[S]earch by [G]it' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+    vim.keymap.set('n', '<leader>sq', builtin.quickfix, { desc = '[S]earch [Q]uickfix' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })

@@ -44,9 +44,9 @@ return {
       harpoon.ui:toggle_quick_menu(harpoon:list(selected_list), { title = 'Harpoon - [ ' .. string.upper(selected_list) .. ' ]' })
     end
 
-    vim.keymap.set('n', '<leader>ha', function()
+    vim.keymap.set('n', '<M-C-T>', function()
       harpoon:list(selected_list):add()
-    end, { desc = '[H]arpoon [A]dd' })
+    end, { desc = 'Harpoon Add' })
     vim.keymap.set('n', '<leader>oh', function()
       toggle_telescope {
         harpoon:list 'q',
