@@ -231,11 +231,11 @@ return {
       --     vim.cmd.colorscheme 'dracula-dark'
       --   end,
       -- }
-      lspconfig.gopls.setup {
-        on_attach = function()
-          vim.cmd.colorscheme 'nordic'
-        end,
-      }
+      -- lspconfig.gopls.setup {
+      --   on_attach = function()
+      --     vim.cmd.colorscheme 'nordic'
+      --   end,
+      -- }
     end,
   },
 }
