@@ -136,7 +136,7 @@ require 'custom.autocommands'
 --
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- Use `opts = {}` to automatically pass options to a plugin's `setup()` function, forcing the plugin to be loaded.
   --
