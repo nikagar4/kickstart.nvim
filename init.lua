@@ -203,6 +203,7 @@ require('lazy').setup({
     },
   },
   change_detection = { notify = false },
+  rocks = { enabled = false },
 })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
