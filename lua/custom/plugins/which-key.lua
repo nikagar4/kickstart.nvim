@@ -7,14 +7,14 @@
 -- which loads which-key before all the UI elements are loaded. Events can be
 -- normal autocommands events (`:help autocmd-events`).
 --
--- Then, because we use the `config` key, the configuration only runs
--- after the plugin has been loaded:
---  config = function() ... end
+-- Then, because we use the `opts` key (recommended), the configuration runs
+-- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 return {
   -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
   opts = {
+    -- this setting is independent of vim.o.timeoutlen
     delay = 0,
     icons = {
       -- set icon mappings to true if you have a Nerd Font
@@ -55,11 +55,7 @@ return {
 
     -- Document existing key chains
     spec = {
-      { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-      { '<leader>d', group = '[D]ocument' },
-      { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
-      { '<leader>w', group = '[W]orkspace' },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       { '<leader>x', group = '[X]code' },
       { '<leader>o', group = '[O]pen' },
