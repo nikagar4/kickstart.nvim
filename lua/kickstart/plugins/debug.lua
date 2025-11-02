@@ -25,8 +25,8 @@ return {
     local dapui = require 'dapui'
 
     local xcodebuild = require 'xcodebuild.integrations.dap'
-    local codelldbPath = os.getenv 'HOME' .. '/.tools/codelldb-darwin/extension/adapter/codelldb'
-    xcodebuild.setup(codelldbPath)
+    -- local codelldbPath = os.getenv 'HOME' .. '/.tools/codelldb-darwin/extension/adapter/codelldb'
+    -- xcodebuild.setup(codelldbPath)
 
     -- [[ Default keymaps ]]
     vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })

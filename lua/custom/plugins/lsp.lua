@@ -10,7 +10,13 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      { 'j-hui/fidget.nvim', opts = {
+        notification = {
+          window = {
+            winblend = 0,
+          },
+        },
+      } },
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
@@ -45,6 +51,11 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
+          -- Set border style to hover menu
+          map('K', function()
+            vim.lsp.buf.hover { border = 'rounded' }
+          end, 'LSP Hover Documentation')
+
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -54,11 +65,11 @@ return {
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
           -- Find references for the word under your cursor.
-          map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          map('grr', builtin.lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('gri', builtin.lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to parent context
           -- useful to jump to the function or object you're inside
@@ -67,7 +78,7 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('grd', builtin.lsp_definitions, '[G]oto [D]efinition')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -75,16 +86,16 @@ return {
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gO', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+          map('gO', builtin.lsp_document_symbols, 'Open Document Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+          map('gW', builtin.lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+          map('grt', builtin.lsp_type_definitions, '[G]oto [T]ype Definition')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
@@ -234,35 +245,40 @@ return {
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-      ---@diagnostic disable-next-line: missing-fields
-      require('mason-lspconfig').setup {
-        ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-        automatic_installation = false,
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
-      local lspconfig = require 'lspconfig'
-      lspconfig.sourcekit.setup {
-        -- cmd = { '/usr/local/swift/usr/bin/sourcekit-lsp' },
-        capabilities = {
-          workspace = {
-            didChangeWatchedFiles = {
-              dynamicRegistration = true,
-            },
-          },
-        },
-        -- on_attach = function()
-        --   vim.cmd.colorscheme 'xcode'
-        -- end,
-      }
+      -- ---@diagnostic disable-next-line: missing-fields
+      -- require('mason-lspconfig').setup {
+      --   ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
+      --   automatic_installation = false,
+      --   handlers = {
+      --     function(server_name)
+      --       local server = servers[server_name] or {}
+      --       -- This handles overriding only values explicitly passed
+      --       -- by the server configuration above. Useful when disabling
+      --       -- certain features of an LSP (for example, turning off formatting for ts_ls)
+      --       server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+      --       require('lspconfig')[server_name].setup(server)
+      --     end,
+      --   },
+      -- }
+      for server, cfg in pairs(servers) do
+        cfg.capabilities = vim.tbl_deep_extend('force', {}, capabilities, cfg.capabilities or {})
+        vim.lsp.config(server, cfg)
+        vim.lsp.enable(server)
+      end
+      -- local lspconfig = require 'lspconfig'
+      -- lspconfig.sourcekit.setup {
+      --   -- cmd = { '/usr/local/swift/usr/bin/sourcekit-lsp' },
+      --   capabilities = {
+      --     workspace = {
+      --       didChangeWatchedFiles = {
+      --         dynamicRegistration = true,
+      --       },
+      --     },
+      --   },
+      --   -- on_attach = function()
+      --   --   vim.cmd.colorscheme 'xcode'
+      --   -- end,
+      -- }
       -- lspconfig.rust_analyzer.setup {
       --   on_attach = function()
       --     vim.cmd.colorscheme 'dracula-dark'

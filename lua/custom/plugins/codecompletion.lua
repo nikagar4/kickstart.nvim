@@ -60,6 +60,29 @@ return {
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+        --
+        -- [Overrides]
+        -- Accept highlighted item
+        ['<M-C-L>'] = { 'show', 'accept' },
+        --
+        -- Or you can use a function
+        -- ['<M-C-L>'] = {
+        --   function(cmp)
+        --     cmp.accept()
+        --   end,
+        -- },
+        --
+        -- Select the [n]ext item
+        ['<M-NL>'] = { 'select_next' },
+        --
+        -- Select the [p]revious item
+        ['<M-C-K>'] = { 'select_prev' },
+        --
+        -- Scroll documentation up
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        --
+        -- Scroll documentation down
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
       },
 
       appearance = {
@@ -71,11 +94,37 @@ return {
       completion = {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = false, auto_show_delay_ms = 500 },
+        menu = {
+          -- auto_show = false,
+          border = 'rounded',
+        },
+        -- ghost_text = {
+        --   enabled = true,
+        -- },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+          window = {
+            border = 'rounded',
+          },
+          --
+          -- nvim-cmp style
+          -- draw = {
+          --   columns = {
+          --     { 'label', 'label_description', gap = 1 },
+          --     { 'kind_icon', 'kind', gap = 1 },
+          --   },
+          -- },
+        },
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        default = {
+          'lsp',
+          -- 'path',
+          'snippets',
+          'lazydev',
+        },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
@@ -90,7 +139,7 @@ return {
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
