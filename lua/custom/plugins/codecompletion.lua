@@ -31,8 +31,8 @@ return {
       },
       'folke/lazydev.nvim',
     },
-    --- @module 'blink.cmp'
-    --- @type blink.cmp.Config
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
       keymap = {
         -- 'default' (recommended) for mappings similar to built-in completions
@@ -73,10 +73,20 @@ return {
         -- },
         --
         -- Select the [n]ext item
-        ['<M-NL>'] = { 'select_next' },
+        ['<M-NL>'] = {
+          'show',
+          function(cmp)
+            cmp.select_next { auto_insert = false }
+          end,
+        },
         --
         -- Select the [p]revious item
-        ['<M-C-K>'] = { 'select_prev' },
+        ['<M-C-K>'] = {
+          'show',
+          function(cmp)
+            cmp.select_prev { auto_insert = false }
+          end,
+        },
         --
         -- Scroll documentation up
         ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
@@ -95,12 +105,13 @@ return {
         -- By default, you may press `<c-space>` to show the documentation.
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         menu = {
-          -- auto_show = false,
+          auto_show = false,
           border = 'rounded',
         },
-        -- ghost_text = {
-        --   enabled = true,
-        -- },
+        ghost_text = {
+          enabled = true,
+          show_without_menu = false,
+        },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 500,
