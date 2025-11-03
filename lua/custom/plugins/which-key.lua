@@ -13,6 +13,9 @@ return {
   -- Useful plugin to show you pending keybinds.
   'folke/which-key.nvim',
   event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+  ---@module 'which-key'
+  ---@type wk.Opts
+  ---@diagnostic disable-next-line: missing-fields
   opts = {
     -- this setting is independent of vim.o.timeoutlen
     delay = 0,
@@ -55,7 +58,7 @@ return {
 
     -- Document existing key chains
     spec = {
-      { '<leader>s', group = '[S]earch' },
+      { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
       { '<leader>g', group = '[G]it', mode = { 'n', 'v' } },
       { '<leader>x', group = '[X]code' },
       { '<leader>o', group = '[O]pen' },

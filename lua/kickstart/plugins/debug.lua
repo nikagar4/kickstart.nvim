@@ -1,6 +1,8 @@
 -- Primarily focused on configuring the debugger for Go, but can
 -- be extended to other languages as well.
 
+---@module 'lazy'
+---@type LazySpec
 return {
   'mfussenegger/nvim-dap',
   dependencies = {

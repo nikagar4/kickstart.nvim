@@ -159,6 +159,9 @@ require('lazy').setup({
     -- used for completion, annotations and signatures of Neovim apis
     'folke/lazydev.nvim',
     ft = 'lua',
+    ---@module 'lazydev'
+    ---@type lazydev.Config
+    ---@diagnostic disable-next-line: missing-fields
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
@@ -167,7 +170,15 @@ require('lazy').setup({
     },
   },
   -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+  {
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    ---@module 'todo-comments'
+    ---@type TodoOptions
+    ---@diagnostic disable-next-line: missing-fields
+    opts = { signs = false },
+  },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
