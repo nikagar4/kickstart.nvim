@@ -16,6 +16,8 @@ return { -- Collection of various small independent plugins/modules
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
+    require('mini.splitjoin').setup()
+
     require('mini.files').setup {
       content = {
         sort = function(entries)

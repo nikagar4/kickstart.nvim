@@ -1,0 +1,81 @@
+-- local is_table_or_item = function(node)
+--   if node == nil then
+--     return false
+--   end
+--
+--   if node:type() == 'table_constructor' then
+--     return true
+--   end
+--
+--   local parent = node:parent()
+--
+--   if parent == nil then
+--     return false
+--   end
+--
+--   if parent:type() == 'table_constructor' then
+--     return true
+--   end
+--
+--   return false
+-- end
+--
+-- local is_inside_arguments = function(node)
+--   print(vim.inspect(node))
+--   return false
+--   -- arguments
+-- end
+
+---@module 'lazy'
+---@type LazySpec
+return {
+  -- 'nvimtools/none-ls.nvim',
+  -- dependencies = {
+  --   'neovim/nvim-lspconfig',
+  --   'nvim-lua/plenary.nvim',
+  --   'nvim-mini/mini.nvim',
+  --   -- 'mini.splitjoin'
+  -- },
+  -- config = function()
+  --   local lsp = require 'null-ls'
+  --   -- local mini = require 'mini.splitjoin'
+  --   -- local mini = require 'mini.ai'
+
+  --   local split_join_action = {
+  --     name = 'custom_split_join_action',
+  --     method = lsp.methods.CODE_ACTION,
+  --     filetypes = { 'lua' },
+  --     generator = {
+  --       fn = function()
+  --         local out = {}
+
+  --         local node = vim.treesitter.get_node()
+
+  --         if is_inside_arguments(node) then
+  --           table.insert(out, {
+  --             title = 'Print Hello World',
+  --             action = function()
+  --               print 'Hello, World!'
+  --             end,
+  --           })
+  --         end
+  --         -- if is_table_or_item(node) then
+  --         --   table.insert(out, {
+  --         --     title = 'Print Hello World',
+  --         --     action = function()
+  --         --       print 'Hello, World!'
+  --         --     end,
+  --         --   })
+  --         -- end
+
+  --         -- print(vim.inspect(context))
+  --         return out
+  --       end,
+  --     },
+  --   }
+
+  --   lsp.register(split_join_action)
+  --   local opts = { debug = true }
+  --   lsp.setup(opts)
+  -- end,
+}
