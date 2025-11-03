@@ -36,7 +36,7 @@ return {
       -- end,
     },
   },
-  dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+  dependencies = { { 'nvim-mini/mini.icons', opts = {} } },
   init = function()
     vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = '[O]il Open parent directory' })
   end,

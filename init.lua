@@ -110,7 +110,10 @@ vim.o.cursorline = true
 vim.o.scrolloff = 10
 
 -- Disable line wrap
-vim.opt.wrap = true
+vim.o.wrap = true
+
+-- Adds highlighted line at 120 column
+-- vim.o.colorcolumn = '120'
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
