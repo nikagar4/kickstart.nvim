@@ -1,0 +1,15 @@
+The entries in /usr/bin are just a front for whatever you choose with xcode-select:
+
+$> /usr/bin/clang --version
+Apple LLVM version 8.0.0 (clang-800.0.38)
+Target: x86_64-apple-darwin15.6.0
+Thread model: posix
+InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
+The standalone command line tools are installed in /Library/Developer/CommandLineTools:
+
+$> sudo xcode-select -s /Library/Developer/CommandLineTools
+$> /usr/bin/clang --version
+Apple LLVM version 7.3.0 (clang-703.0.31)
+Target: x86_64-apple-darwin15.6.0
+Thread model: posix
+InstalledDir: /Library/Developer/CommandLineTools/usr/bin 
