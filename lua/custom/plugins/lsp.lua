@@ -188,7 +188,7 @@ return {
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-      local servers = {
+      local mason_servers = {
         -- clangd = {},
         gopls = {},
         pyright = {},
@@ -247,7 +247,7 @@ return {
       --
       -- You can add other tools here that you want Mason to install
       -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = vim.tbl_keys(mason_servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
@@ -269,13 +269,8 @@ return {
       --   },
       -- }
 
-      for server, cfg in pairs(servers) do
-        cfg.capabilities = vim.tbl_deep_extend('force', {}, capabilities, cfg.capabilities or {})
-        vim.lsp.config(server, cfg)
-        vim.lsp.enable(server)
-      end
-
-      for server, cfg in pairs(other_servers) do
+      local all_servers = vim.tbl_extend('force', {}, mason_servers, other_servers)
+      for server, cfg in pairs(all_servers) do
         cfg.capabilities = vim.tbl_deep_extend('force', {}, capabilities, cfg.capabilities or {})
         vim.lsp.config(server, cfg)
         vim.lsp.enable(server)
