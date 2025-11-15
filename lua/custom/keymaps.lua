@@ -5,9 +5,6 @@
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -85,11 +82,20 @@ vim.keymap.set('n', '<leader>bo', '<cmd>%bd|e#<CR>', { desc = '[B]uffer Delete [
 
 -- Open
 vim.keymap.set('n', '<leader>od', function()
-  vim.diagnostic.open_float(nil, { focus = false })
+  local value = vim.diagnostic.open_float(nil, { focus = false })
+  print(value)
 end, { desc = '[O]pen [D]iagnostics' })
+
 vim.keymap.set('n', '<leader>or', '<cmd>reg<CR>', { desc = '[O]pen [R]egister' })
 -- lua/custom/plugins/harpoon.lua - <leader>oh open harpoon
 -- lua/custom/plugins/which-key.lua - <leader>ow open which-key
+
+-- leader oy -> open yazi
+vim.keymap.set('n', '<leader>og', function()
+  vim.cmd 'silent !tmux neww lazygit'
+  -- git rev-parse --is-inside-work-tree &>/dev/null && (tmux select-window -t lzgt &>/dev/null || tmux neww -n 'lzgt' -t 9 lazygit)
+  -- tmux popup -w "100%" -h "100%" lazygit
+end, { desc = '[O]pen [G]it' })
 
 -- [[ MARKS ]]
 vim.keymap.set('n', '<M-C-O>', "'o", { desc = 'Jump to mark o' })

@@ -35,3 +35,11 @@ function MergeArray(t1, t2)
   end
   return local_table
 end
+
+function Bind(fn, ...)
+  local args = { ... }
+
+  return function()
+    return fn(unpack(args))
+  end
+end
