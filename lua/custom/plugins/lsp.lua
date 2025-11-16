@@ -16,6 +16,7 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
+      -- TODO: extend this
       { 'j-hui/fidget.nvim', opts = {
         notification = {
           window = {
