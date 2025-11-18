@@ -83,6 +83,9 @@ return {
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
         -- map('n', '<leader>tD', gitsigns.preview_hunk_inline, { desc = '[T]oggle git show [D]eleted' })
+
+        map('n', '<leader>gq', Bind(gitsigns.setqflist, 'all', { open = false }), { desc = '[G]it [Q]uickfix' })
+
         map('n', '<C-j>', function()
           gitsigns.nav_hunk 'next'
         end, { desc = 'Jump to next [H]unk' })

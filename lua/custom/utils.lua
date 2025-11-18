@@ -36,6 +36,14 @@ function MergeArray(t1, t2)
   return local_table
 end
 
+function Bind(fn, ...)
+  local args = { ... }
+
+  return function()
+    return fn(unpack(args))
+  end
+end
+
 function ColorColumnByFormatter(filename, column_length_key)
   local formatter_file_name = filename
   local file = io.open(formatter_file_name, 'r')
