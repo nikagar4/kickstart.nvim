@@ -43,3 +43,34 @@ function Bind(fn, ...)
     return fn(unpack(args))
   end
 end
+
+function ColorColumnByFormatter(filename, column_length_key)
+  local formatter_file_name = filename
+  local file = io.open(formatter_file_name, 'r')
+
+  if not file then
+    return
+  end
+
+  local status, column = pcall(function()
+    local content = file:read '*a'
+    file:close()
+
+    local data = vim.json.decode(content)
+    local column = data[column_length_key]
+
+    if not (type(column) == 'number') then
+      error 'Corrupted column'
+    end
+
+    return column
+  end)
+
+  if not status then
+    print 'error processing column length'
+    print(column)
+    return
+  end
+
+  vim.o.colorcolumn = string.format('%i', column)
+end
