@@ -45,7 +45,7 @@ return {
     },
     sections = {
       lualine_a = { 'searchcount', 'mode' },
-      lualine_b = { 'diff', 'diagnostics' },
+      lualine_b = { 'diagnostics' },
       lualine_c = {
         { "'󰣪 ' .. vim.g.xcodebuild_last_status", color = { fg = 'Gray' } },
         { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = '#9ccfd8' } },

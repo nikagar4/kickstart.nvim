@@ -50,7 +50,8 @@ return {
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
-          local builtin = require 'telescope.builtin'
+          local telescope = require 'telescope.builtin'
+          local fzf = require 'fzf-lua'
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc, mode)
@@ -72,11 +73,12 @@ return {
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
           -- Find references for the word under your cursor.
-          map('grr', builtin.lsp_references, '[G]oto [R]eferences')
+          -- map('grr', telescope.lsp_references, '[G]oto [R]eferences')
+          map('grr', fzf.lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gri', builtin.lsp_implementations, '[G]oto [I]mplementation')
+          map('gri', telescope.lsp_implementations, '[G]oto [I]mplementation')
 
           -- Jump to parent context
           -- useful to jump to the function or object you're inside
@@ -85,7 +87,8 @@ return {
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('grd', builtin.lsp_definitions, '[G]oto [D]efinition')
+          -- map('grd', telescope.lsp_definitions, '[G]oto [D]efinition')
+          map('grd', fzf.lsp_definitions, '[G]oto [D]efinition')
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
@@ -93,16 +96,16 @@ return {
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('gO', builtin.lsp_document_symbols, 'Open Document Symbols')
+          map('gO', telescope.lsp_document_symbols, 'Open Document Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
-          map('gW', builtin.lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+          map('gW', telescope.lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('grt', builtin.lsp_type_definitions, '[G]oto [T]ype Definition')
+          map('grt', telescope.lsp_type_definitions, '[G]oto [T]ype Definition')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
