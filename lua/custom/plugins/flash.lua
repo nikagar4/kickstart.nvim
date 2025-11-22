@@ -4,7 +4,7 @@ return {
   -- stylua: ignore
   keys = {
     -- { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "<leader>f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "[F]lash" },
+    { "<leader><leader>", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
     { "<leader>tt", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash [T]reesitter" },
     -- { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
     -- { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
@@ -163,7 +163,7 @@ return {
       -- options used when flash is activated through
       -- `f`, `F`, `t`, `T`, `;` and `,` motions
       char = {
-        enabled = true,
+        enabled = false,
         -- dynamic configuration for ftFT motions
         config = function(opts)
           -- autohide flash when in operator-pending mode
