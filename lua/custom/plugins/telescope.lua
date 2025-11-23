@@ -19,7 +19,7 @@ return {
       end,
     },
     ---@diagnostic disable-next-line: missing-fields
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+    -- { 'nvim-telescope/telescope-ui-select.nvim' },
 
     -- Useful for getting correct suggestions based on usage
     ---@diagnostic disable-next-line: missing-fields
@@ -96,15 +96,15 @@ return {
         },
       },
       extensions = {
-        ['ui-select'] = {
-          require('telescope.themes').get_cursor(),
-        },
+        -- ['ui-select'] = {
+        --   require('telescope.themes').get_cursor(),
+        -- },
       },
     }
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
-    pcall(require('telescope').load_extension, 'ui-select')
+    -- pcall(require('telescope').load_extension, 'ui-select')
     pcall(require('telescope').load_extension, 'frecency')
 
     -- See `:help telescope.builtin`
