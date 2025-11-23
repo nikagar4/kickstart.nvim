@@ -63,7 +63,7 @@ return {
         --
         -- [Overrides]
         -- Accept highlighted item
-        ['<M-C-L>'] = { 'show', 'accept' },
+        ['<C-y>'] = { 'show', 'accept' },
         --
         -- Or you can use a function
         -- ['<M-C-L>'] = {
@@ -73,7 +73,7 @@ return {
         -- },
         --
         -- Select the [n]ext item
-        ['<M-NL>'] = {
+        ['<C-n>'] = {
           'show',
           function(cmp)
             cmp.select_next { auto_insert = false }
@@ -81,7 +81,7 @@ return {
         },
         --
         -- Select the [p]revious item
-        ['<M-C-K>'] = {
+        ['<C-p>'] = {
           'show',
           function(cmp)
             cmp.select_prev { auto_insert = false }
